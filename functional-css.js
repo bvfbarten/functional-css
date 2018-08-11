@@ -63,7 +63,7 @@
                     current[fullKey][attribute] = $iterable[$counter];                   
                 }
             } else {
-                for(var $counter = 0; $counter < $counterMax; $counter +=1) {
+                for(var $counter = 0; $counter <= $counterMax; $counter +=1) {
                     var fullKey = "." + prefix + className + '-' + ($counter  * $functionCounterMult);
                     current[fullKey] = {};
                     current[fullKey][attribute] = ($counter * $counterMult * $functionCounterMult) + $unit;                   
@@ -84,11 +84,36 @@
     createLoop('mb', 'margin-bottom', -1);
     createLoop('ma', 'margin', -1);
 
+    createLoop('h', 'height', 1);
+    createLoop('hm', 'max-height', 1);
+    createLoop('w', 'width', 1);
+    createLoop('wm', 'max-width', 1);
+
+    createLoop('hp', 'height', 2, "%");
+    createLoop('wp', 'width', 2, "%");
+    createLoop('hmp', 'max-height', 2, "%");
+    createLoop('wmp', 'max-width', 2, "%");
+
+
+
     createLoop('pl', 'padding-left');
     createLoop('pr', 'padding-right');
     createLoop('pt', 'padding-top');
     createLoop('pb', 'padding-bottom');
     createLoop('pa', 'padding');
+
+    createLoop('brtrp', 'border-radius-top-right', 1, '%');
+    createLoop('brtlp', 'border-radius-top-left', 1, '%');
+    createLoop('brbrp', 'border-radius-bottom-right', 1, '%');
+    createLoop('brblp', 'border-radius-bottom-left', 1, '%');
+
+    createLoop('brtp', 'border-radius-top-right', 1, '%');
+    createLoop('brtp', 'border-radius-top-left', 1, '%');
+
+    createLoop('brbp', 'border-radius-bottom-right', 1, '%');
+    createLoop('brbp', 'border-radius-bottom-left', 1, '%');
+
+    createLoop('brap', 'border-radius', 1, '%');
 
     createLoop('brtr', 'border-radius-top-right');
     createLoop('brtl', 'border-radius-top-left');
