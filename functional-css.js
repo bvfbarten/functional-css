@@ -6,11 +6,14 @@
     xs up to $sm
     sm up to $md
     md up to $lg
-    lg above
+    lg up to $xl
+    xl above
+    using bootstrap 4 default breakpoints
     */
-    var $sm = 768;
-    var $md = 992;
-    var $lg= 1200;
+    var $sm = 576;
+    var $md = 768;
+    var $lg= 992;
+    var $xl= 1200;
     var stylesheet = cssx();
     function createLoop(className, attribute, $functionCounterMult, $unit, $iterable){
         if($functionCounterMult === undefined){
@@ -19,30 +22,35 @@
         if($unit === undefined){
             $unit = 'px';
         }
-        
         var medias = {
             'all' : 0,
             'xs' : $sm,
             'sm' : $sm,
             'md' : $md,
-            'lg' : $lg
+            'lg' : $lg,
+            'xl' : $xl
         }
         mediaSheet = {};
         for(var key in medias){
             current = {}; 
+            //all will cover any length
             if(key == 'all'){
                 mediaSheet[key] = stylesheet.add( { });
             }
+            //xs will cover any length up to the sm length
             if(key == 'xs'){
                 var sheet = {};
                 sheet['@media screen and (max-width: ' + medias[key] + 'px)'] = {};
                 mediaSheet[key] = stylesheet.add(sheet);
+                //sm and beyond will cover their respective lengths
             } else {
                 var sheet = {};
                 sheet['@media screen and (min-width: ' + medias[key] + 'px)'] = {};
                 mediaSheet[key] = stylesheet.add(sheet);
             }
             var prefix = key != 'all' ? key + '-' : '';
+            //everything is important that we do here
+            var important = "!important";
             if(window.isNaN($functionCounterMult)){
                 fullKey = "." + prefix + className;
                 current[fullKey] = {};
@@ -105,22 +113,11 @@
 
     createLoop('bst', 'border-style', 1, '', {
         'dashed':'dashed',
-        'solid':'solid'
-    });
-    createLoop('bsb', 'border-style', 1, '', {
-        'dashed':'dashed',
-        'solid':'solid'
-    });
-    createLoop('bsr', 'border-style', 1, '', {
-        'dashed':'dashed',
-        'solid':'solid'
-    });
-    createLoop('bsl', 'border-style', 1, '', {
-        'dashed':'dashed',
-        'solid':'solid'
+        'solid':'solid',
+        'double':'double',
+        'dotted':'dotted',
     });
     createLoop('tac', 'text-align', 'center');
     createLoop('tal', 'text-align', 'left');
     createLoop('tar', 'text-align', 'right');
-
 })()
