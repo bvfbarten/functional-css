@@ -1,20 +1,14 @@
-<script src="cssx.js"></script>
-<script src="functional-css.js" async></script>
-<h1 class="fs-50">
-    functional-css
-</h1>
+# functional-css
 
-<p class="fs-20">
-    Compile bash requires uglifyjs.
-</p>
+#    Compile bash requires uglifyjs.
 
-<style>
-table p{
-    border:1px solid black;
-}
-</style>
 Sizes:
 xs,sm,md,lg,xl act as prefixes
+    example: 
+        xs-ml-10 margin-left:10px for extra-small devices 
+        xs-ml--10 margin-left:-10px for extra-small devices
+    
+    
 
 
     createLoop('ml', 'margin-left');
