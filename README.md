@@ -4,9 +4,10 @@
 
 Sizes:
 xs,sm,md,lg,xl act as prefixes
-    example: 
-        xs-ml-10 margin-left:10px for extra-small devices 
-        xs-ml--10 margin-left:-10px for extra-small devices
+
+* example: 
+    * xs-ml-10 margin-left:10px for extra-small devices 
+    * xs-ml--10 margin-left:-10px for extra-small devices
     
     
 
