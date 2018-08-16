@@ -41,7 +41,7 @@ xs,sm,md,lg,xl act as prefixes
 
     createLoop('wm', 'max-width', 1);
 
-
+    createLoop('lh', 'line-height', 1);
 
     createLoop('hp', 'height', 2, "%");
 

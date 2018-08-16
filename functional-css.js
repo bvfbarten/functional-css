@@ -14,8 +14,9 @@
     var $md = 768;
     var $lg= 992;
     var $xl= 1200;
+    var current;
     var stylesheet = cssx();
-    function createLoop(className, attribute, $functionCounterMult, $unit, $iterable){
+    function createLoop(className, attribute, $functionCounterMult, $unit, $iterable, $alternateMax){
         if($functionCounterMult === undefined){
             $functionCounterMult = 1;
         }
@@ -30,22 +31,42 @@
             'lg' : $lg,
             'xl' : $xl
         }
+        var mediaKeys = [
+            'all',
+            'xs',
+            'sm',
+            'md',
+            'lg',
+            'xl'
+        ];
+            
         mediaSheet = {};
-        for(var key in medias){
+        var key;
+        var nextKey;
+        for(var mediaCounter = 0; mediaCounter < mediaKeys.length; mediaCounter += 1){
+            key = mediaKeys[mediaCounter];
             current = {}; 
             //all will cover any length
             if(key == 'all'){
-                mediaSheet[key] = stylesheet.add( { });
-            }
+                sheet = {'@media all': {}};
+                mediaSheet[key] = stylesheet.add( sheet );
+            } else
             //xs will cover any length up to the sm length
             if(key == 'xs'){
                 var sheet = {};
-                sheet['@media screen and (max-width: ' + medias[key] + 'px)'] = {};
+                sheet['@media  (max-width: ' + medias[key] + 'px)'] = {};
                 mediaSheet[key] = stylesheet.add(sheet);
                 //sm and beyond will cover their respective lengths
-            } else {
+            } else if (key == 'xl'){
                 var sheet = {};
-                sheet['@media screen and (min-width: ' + medias[key] + 'px)'] = {};
+                sheet['@media  (min-width: ' + medias[key] + 'px)'] = {};
+                mediaSheet[key] = stylesheet.add(sheet);
+            } else {
+                var nextKey = mediaKeys[mediaCounter + 1];
+                var sheet = {};
+                var line = '@media (min-width: ' + medias[key] + 'px) and (max-width: ' + medias[nextKey] + 'px)';
+                console.log(line);
+                sheet[line] = {};
                 mediaSheet[key] = stylesheet.add(sheet);
             }
             var prefix = key != 'all' ? key + '-' : '';
@@ -54,19 +75,20 @@
             if(window.isNaN($functionCounterMult)){
                 fullKey = "." + prefix + className;
                 current[fullKey] = {};
-                current[fullKey][attribute] = $functionCounterMult;                   
+                current[fullKey][attribute] = $functionCounterMult + important;                   
             }
             if($iterable !== undefined){
                 for(var $counter in $iterable) {
                     var fullKey = "." + prefix + className + "-" + $counter;
                     current[fullKey] = {};
-                    current[fullKey][attribute] = $iterable[$counter];                   
+                    current[fullKey][attribute] = $iterable[$counter] + important;                   
                 }
             } else {
-                for(var $counter = 0; $counter <= $counterMax; $counter +=1) {
+                var $max = $alternateMax ? $alternateMax : $counterMax;
+                for(var $counter = 0; $counter <= $max; $counter +=1) {
                     var fullKey = "." + prefix + className + '-' + ($counter  * $functionCounterMult);
                     current[fullKey] = {};
-                    current[fullKey][attribute] = ($counter * $counterMult * $functionCounterMult) + $unit;                   
+                    current[fullKey][attribute] = ($counter * $counterMult * $functionCounterMult) + $unit + important;                   
                 }
             }
             mediaSheet[key].nested(current);
@@ -89,6 +111,8 @@
     createLoop('hm', 'max-height', 1);
     createLoop('w', 'width', 1);
     createLoop('wm', 'max-width', 1);
+
+    createLoop('lh', 'line-height', 1);
 
     createLoop('hp', 'height', 2, "%");
     createLoop('wp', 'width', 2, "%");
@@ -128,6 +152,7 @@
     createLoop('bra', 'border-radius');
 
     createLoop('fs', 'font-size');
+    createLoop('fw', 'font-weight', 100, '', undefined, 1000);
 
     createLoop('bw', 'border-width');
     createLoop('bsa', 'border-style', 1, '', {
