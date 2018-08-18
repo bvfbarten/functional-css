@@ -65,7 +65,6 @@
                 var nextKey = mediaKeys[mediaCounter + 1];
                 var sheet = {};
                 var line = '@media (min-width: ' + medias[key] + 'px) and (max-width: ' + medias[nextKey] + 'px)';
-                console.log(line);
                 sheet[line] = {};
                 mediaSheet[key] = stylesheet.add(sheet);
             }
