@@ -5,6 +5,12 @@
 Sizes:
 xs,sm,md,lg,xl act as prefixes
 
+xs up to 576
+sm from 576 to 768
+md from 768 to 992
+lg from 992 to 1200
+xl above 1200;
+
 * example: 
     * xs-ml-10 margin-left:10px for extra-small devices 
     * xs-ml--10 margin-left:-10px for extra-small devices

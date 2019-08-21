@@ -16,6 +16,13 @@
     var $xl= 1200;
     var current;
     var stylesheet = cssx();
+    /*
+     * @param className: string, The class to be used
+     * @param attribute: string, css attribute to be modified
+     * @param functionCounterMult, integer, multiplier for counter
+     * @param unit: string, unit type for css (px, percentage)
+     * @param alternateMax: array, if not null, loop through this array rather than from 1 to 50
+     */
     function createLoop(className, attribute, $functionCounterMult, $unit, $iterable, $alternateMax){
         if($functionCounterMult === undefined){
             $functionCounterMult = 1;
